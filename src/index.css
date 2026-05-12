@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
 @layer base {
   body {
     @apply bg-luxor-50 text-luxor-900 antialiased;
@@ -11,7 +14,7 @@
   
   ::selection {
     background-color: #C5A059; 
-    color: #FFFFFF; 
+    color: #0A0A0A; 
   }
 
   ::-webkit-scrollbar {
