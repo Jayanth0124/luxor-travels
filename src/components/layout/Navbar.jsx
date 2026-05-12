@@ -16,10 +16,11 @@ export default function Navbar() {
           </Link>
           
           <div className="hidden md:flex items-center gap-10 text-xs tracking-[0.1em] font-medium text-luxor-400 uppercase">
-            <Link to="/vehicles" className="hover:text-luxor-gold transition-colors">Fleet</Link>
-            <Link to="/campsites" className="hover:text-luxor-gold transition-colors">Retreats</Link>
-            <Link to="/journal" className="hover:text-luxor-gold transition-colors">Journal</Link>
-            <Link to="/contact" className="hover:text-luxor-gold transition-colors">Concierge</Link>
+            <Link to="/" className="hover:text-luxor-gold transition-colors">HOME</Link>
+            <Link to="/vehicles" className="hover:text-luxor-gold transition-colors">VEHICLES</Link>
+            <Link to="/campsites" className="hover:text-luxor-gold transition-colors">CAMPSITE</Link>
+            <Link to="/journal" className="hover:text-luxor-gold transition-colors">JOURNAL</Link>
+            <Link to="/contact" className="hover:text-luxor-gold transition-colors">CONTACT</Link>
           </div>
 
           <div className="flex items-center gap-6">

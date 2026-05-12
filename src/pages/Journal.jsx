@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
@@ -8,30 +8,34 @@ import {
   ArrowRight,
   Clock3,
   MapPin,
-  Camera,
-  BookOpen,
   Mountain,
   Waves,
   Trees,
-  X
+  X,
 } from "lucide-react";
 
-// VIDEOS
+// ---------------- VIDEOS ----------------
 const VIDEOS = {
-  hero: "https://videos.pexels.com/video-files/26263168/26263168-hd_1920_1080_30fps.mp4",
-  vlog: "https://videos.pexels.com/video-files/3798937/3798937-hd_1920_1080_25fps.mp4",
+  hero:
+    "https://videos.pexels.com/video-files/26263168/26263168-hd_1920_1080_30fps.mp4",
+
+  vlog:
+    "https://videos.pexels.com/video-files/3798937/3798937-hd_1920_1080_25fps.mp4",
 };
 
-// DUMMY POSTS
+// ---------------- DUMMY POSTS ----------------
 const POSTS = [
   {
     id: 1,
     type: "Vlog",
     title: "7 Days Through The Himalayas",
+
     description:
       "Luxury caravan living across foggy mountain roads, hidden villages, sunrise camps, and unforgettable Himalayan silence.",
+
     image:
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop",
+
     location: "Himachal Pradesh",
     duration: "18 Min Watch",
     mood: "Mountain Escape",
@@ -41,11 +45,15 @@ const POSTS = [
   {
     id: 2,
     type: "Blog",
+
     title: "The Art Of Off-Grid Luxury Living",
+
     description:
       "Inside the world of modern caravan escapes, immersive outdoor comfort, cinematic road journeys, and curated luxury travel.",
+
     image:
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1400&auto=format&fit=crop",
+
     location: "Lake District",
     duration: "6 Min Read",
     mood: "Luxury Retreat",
@@ -54,11 +62,15 @@ const POSTS = [
   {
     id: 3,
     type: "Vlog",
+
     title: "Desert Roads & Golden Sunsets",
+
     description:
       "Driving through endless landscapes, cinematic campsites, bonfire nights, and luxury expedition experiences.",
+
     image:
       "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop",
+
     location: "Rajasthan",
     duration: "22 Min Watch",
     mood: "Desert Expedition",
@@ -68,11 +80,15 @@ const POSTS = [
   {
     id: 4,
     type: "Blog",
+
     title: "Top 10 Luxury Campsites In India",
+
     description:
       "Discover breathtaking mountain retreats, lakefront sanctuaries, forest hideaways, and premium glamping escapes.",
+
     image:
       "https://images.unsplash.com/photo-1510312305653-8ed496efae75?q=80&w=1400&auto=format&fit=crop",
+
     location: "India",
     duration: "8 Min Read",
     mood: "Travel Guide",
@@ -84,6 +100,19 @@ export default function Journal() {
 
   // VIDEO MODAL
   const [selectedVideo, setSelectedVideo] = useState(null);
+
+  // PARALLAX
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setOffsetY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const filteredPosts =
     activeFilter === "All"
@@ -108,7 +137,7 @@ export default function Journal() {
 
           </button>
 
-          {/* VIDEO WRAPPER */}
+          {/* VIDEO */}
           <div className="relative w-full max-w-6xl rounded-[2rem] overflow-hidden shadow-[0_40px_120px_rgba(0,0,0,0.5)]">
 
             <video
@@ -124,90 +153,117 @@ export default function Journal() {
       )}
 
       {/* ---------------- HERO ---------------- */}
-      <section className="relative min-h-[85vh] overflow-hidden">
+      <section className="relative h-[110vh] overflow-hidden">
 
-        {/* BACKGROUND */}
-        <div className="absolute inset-0">
+        {/* PARALLAX BG */}
+        <div
+          className="absolute inset-0 will-change-transform"
+          style={{
+            transform: `translate3d(0, ${offsetY * 0.32}px, 0) scale(1.18)`,
+          }}
+        >
 
           <img
             src="https://images.pexels.com/photos/7163672/pexels-photo-7163672.jpeg"
             alt="Travel Journal"
-            className="w-full h-full object-cover brightness-[0.75] scale-105"
+            className="w-full h-[120%] object-cover"
           />
-
-          {/* OVERLAYS */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/10 to-[#f6f3ee]" />
-
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,220,160,0.18),transparent_60%)]" />
-
-          {/* GOLDEN LIGHT */}
-          <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] bg-luxor-gold/20 blur-[140px] rounded-full" />
-
-          {/* BOTTOM FADE */}
-          <div className="absolute bottom-0 left-0 w-full h-[35vh] bg-gradient-to-t from-[#f6f3ee] to-transparent" />
 
         </div>
 
+        {/* DARK CINEMATIC OVERLAY */}
+        <div className="absolute inset-0 bg-black/20" />
+
+        {/* SOFT GOLD LIGHT */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,rgba(255,220,160,0.18),transparent_42%)]" />
+
+        {/* BOTTOM LUXURY FADE */}
+        <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-gradient-to-t from-[#f6f3ee] via-[#f6f3ee]/60 to-transparent" />
+
         {/* CONTENT */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-40 pb-28">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex items-center">
 
-          <p className="text-white/75 uppercase tracking-[0.35em] text-[11px] mb-6 font-medium">
-            Travel Stories & Cinematic Road Journals
-          </p>
+          <div className="max-w-4xl pt-24">
 
-          <h1 className="font-serif text-6xl md:text-8xl leading-[0.9] tracking-[-0.05em] text-white max-w-5xl mb-8">
+            {/* LABEL */}
+            <p className="text-white/80 uppercase tracking-[0.4em] text-[11px] mb-8 font-medium">
 
-            Stories From
-            <br />
+              Travel Stories & Cinematic Road Journals
 
-            <span className="italic text-[#f1d29b]">
-              Extraordinary Roads
-            </span>
+            </p>
 
-          </h1>
+            {/* HEADING */}
+            <h1 className="font-serif text-[5rem] md:text-[8rem] leading-[0.88] tracking-[-0.06em] text-white mb-10">
 
-          <p className="max-w-2xl text-white/75 text-lg md:text-xl leading-relaxed font-light mb-16">
+              Stories From
+              <br />
 
-            Explore cinematic road journeys, luxury caravan adventures, hidden campsites, travel guides, and immersive outdoor experiences.
-
-          </p>
-
-          {/* MOOD TAGS */}
-          <div className="flex flex-wrap gap-4">
-
-            <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-full px-5 py-3 flex items-center gap-3 text-[#1f1f1f] shadow-xl">
-
-              <Mountain size={16} className="text-luxor-gold" />
-
-              <span className="text-sm">
-                Mountain Escapes
+              <span className="italic text-[#f1d29b]">
+                Extraordinary Roads
               </span>
 
-            </div>
+            </h1>
 
-            <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-full px-5 py-3 flex items-center gap-3 text-[#1f1f1f] shadow-xl">
+            {/* DESCRIPTION */}
+            <p className="max-w-2xl text-white/80 text-xl leading-relaxed font-light mb-14">
 
-              <Trees size={16} className="text-luxor-gold" />
+              Explore cinematic road journeys, luxury caravan adventures,
+              hidden campsites, travel guides, and immersive outdoor
+              experiences.
 
-              <span className="text-sm">
-                Forest Retreats
-              </span>
+            </p>
 
-            </div>
+            {/* TAGS */}
+            <div className="flex flex-wrap gap-5">
 
-            <div className="bg-white/70 backdrop-blur-xl border border-white/50 rounded-full px-5 py-3 flex items-center gap-3 text-[#1f1f1f] shadow-xl">
+              {/* TAG */}
+              <div className="bg-white/75 backdrop-blur-2xl border border-white/50 rounded-full px-6 py-4 flex items-center gap-3 text-[#1f1f1f] shadow-[0_15px_40px_rgba(0,0,0,0.15)]">
 
-              <Waves size={16} className="text-luxor-gold" />
+                <Mountain
+                  size={17}
+                  className="text-luxor-gold"
+                />
 
-              <span className="text-sm">
-                Lakeside Journeys
-              </span>
+                <span className="text-sm font-medium">
+                  Mountain Escapes
+                </span>
+
+              </div>
+
+              {/* TAG */}
+              <div className="bg-white/75 backdrop-blur-2xl border border-white/50 rounded-full px-6 py-4 flex items-center gap-3 text-[#1f1f1f] shadow-[0_15px_40px_rgba(0,0,0,0.15)]">
+
+                <Trees
+                  size={17}
+                  className="text-luxor-gold"
+                />
+
+                <span className="text-sm font-medium">
+                  Forest Retreats
+                </span>
+
+              </div>
+
+              {/* TAG */}
+              <div className="bg-white/75 backdrop-blur-2xl border border-white/50 rounded-full px-6 py-4 flex items-center gap-3 text-[#1f1f1f] shadow-[0_15px_40px_rgba(0,0,0,0.15)]">
+
+                <Waves
+                  size={17}
+                  className="text-luxor-gold"
+                />
+
+                <span className="text-sm font-medium">
+                  Lakeside Journeys
+                </span>
+
+              </div>
 
             </div>
 
           </div>
 
         </div>
+
       </section>
 
       {/* ---------------- FILTERS ---------------- */}
@@ -240,6 +296,7 @@ export default function Journal() {
           </div>
 
         </div>
+
       </section>
 
       {/* ---------------- POSTS ---------------- */}
@@ -267,7 +324,7 @@ export default function Journal() {
                   {/* OVERLAY */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-                  {/* TYPE BADGE */}
+                  {/* TYPE */}
                   <div className="absolute top-6 left-6 bg-white/75 backdrop-blur-xl border border-white/50 rounded-full px-5 py-3 shadow-xl">
 
                     <p className="text-[10px] uppercase tracking-[0.25em] text-[#1f1f1f] font-medium">
@@ -278,7 +335,7 @@ export default function Journal() {
 
                   </div>
 
-                  {/* PLAY BUTTON */}
+                  {/* PLAY */}
                   {post.type === "Vlog" && (
                     <button
                       onClick={() => setSelectedVideo(post.video)}
@@ -361,6 +418,7 @@ export default function Journal() {
           </div>
 
         </div>
+
       </section>
 
       <Footer />
