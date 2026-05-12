@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-luxor-50 text-luxor-900 antialiased;
+  }
+  
+  ::selection {
+    background-color: #C5A059; 
+    color: #FFFFFF; 
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-luxor-50;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-luxor-200 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-luxor-gold;
+  }
+}
