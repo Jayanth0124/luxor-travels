@@ -4,7 +4,7 @@ export const featuredVehicles = [
     name: 'Range Rover Autobiography',
     category: 'Self Drive',
     price: '₹25,000/day',
-    image: 'https://images.unsplash.com/photo-1606016159991-d176828f9d52?q=80&w=2000&auto=format&fit=crop',
+    image: 'https://images.pexels.com/photos/17252045/pexels-photo-17252045.jpeg',
     features: ['5 Seats', 'Automatic', 'AWD']
   },
   {
